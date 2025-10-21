@@ -4,9 +4,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-01-21',
 
   keycloak: {
-    url: 'https://sso.sayfa.page',
-    realm: 'sayfa',
-    clientId: 'sayfa-nuxt',
+    url: 'http://localhost:8080',
+    realm: 'nuxt-app',
+    clientId: 'nuxt-client',
     server: {
       rejectUnauthorized: false, // Allow self-signed certificates in development
     },
