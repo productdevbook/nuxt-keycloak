@@ -66,4 +66,3 @@ declare module 'h3' {
     }
   }
 }
-

@@ -45,7 +45,6 @@ export default defineNuxtModule<ModuleOptions>({
     )
 
     // Server-side config (private)
-    // @ts-ignore - Complex type merging with defu
     nuxt.options.runtimeConfig.keycloak = defu(
       nuxt.options.runtimeConfig.keycloak,
       {
