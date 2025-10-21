@@ -1,0 +1,7 @@
+dist
+.nuxt
+.output
+playground/.nuxt
+playground/app/pages
+playground/app/layouts
+node_modules

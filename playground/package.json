@@ -8,6 +8,8 @@
     "generate": "nuxi generate"
   },
   "dependencies": {
-    "nuxt": "^4.1.3"
+    "nuxt": "^4.1.3",
+    "@nuxtjs/tailwindcss": "7.0.0-beta.1",
+    "nuxt-keycloak": "link:../"
   }
 }
