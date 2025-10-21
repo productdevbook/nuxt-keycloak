@@ -39,7 +39,7 @@
     "test:watch": "vitest watch",
     "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit",
     "bumpp": "bumpp package.json",
-    "release": "pnpm build && pnpm bumpp && pnpm publish --no-git-checks --access public"
+    "release": "pnpm prepack && pnpm bumpp && pnpm publish --no-git-checks --access public"
   },
   "dependencies": {
     "@nuxt/kit": "^4.1.3",
