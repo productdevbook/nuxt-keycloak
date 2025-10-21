@@ -11,8 +11,8 @@
       "import": "./dist/module.mjs"
     },
     "./server": {
-      "types": "./dist/server/index.d.ts",
-      "import": "./dist/server/index.js"
+      "types": "./dist/runtime/server.d.ts",
+      "import": "./dist/runtime/server.js"
     }
   },
   "main": "./dist/module.mjs",
@@ -22,7 +22,7 @@
         "./dist/types.d.mts"
       ],
       "./server": [
-        "./dist/server/index.d.ts"
+        "./dist/runtime/server.d.ts"
       ]
     }
   },

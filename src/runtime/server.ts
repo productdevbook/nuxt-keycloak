@@ -15,4 +15,4 @@ export {
   requireKeycloakAuth,
   requireRealmRole,
   requireResourceRole,
-} from '../runtime/server/utils/keycloak'
+} from './server/utils/keycloak'
