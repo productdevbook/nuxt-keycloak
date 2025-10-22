@@ -79,8 +79,10 @@ export default defineNuxtModule<ModuleOptions>({
     })
 
     // Add server middleware if enabled
+    // Use unshift to ensure this middleware runs FIRST (before any other middleware)
+    // This is crucial for Traefik/reverse proxy scenarios where token needs to be decoded early
     if (options.server?.middleware) {
-      addServerHandler({
+      nuxt.options.serverHandlers.unshift({
         handler: resolver.resolve('./runtime/server/middleware/auth'),
         middleware: true,
       })
