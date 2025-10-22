@@ -32,7 +32,7 @@ export interface ModuleOptions {
   clientId: string
   initOptions?: Partial<KeycloakInitOptions>
   server?: {
-    verifyToken?: boolean
+    verifyToken?: boolean | 'decode'
     middleware?: boolean
     jwksCacheDuration?: number
     rejectUnauthorized?: boolean

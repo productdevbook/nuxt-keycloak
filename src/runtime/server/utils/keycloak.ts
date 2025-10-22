@@ -47,6 +47,37 @@ function getJWKS() {
 }
 
 /**
+ * Decode Keycloak JWT token without verification
+ * Use this when tokens are already verified by a reverse proxy (e.g., Traefik)
+ *
+ * @param token - The JWT token to decode
+ * @returns The decoded token payload or null if invalid format
+ */
+export function decodeKeycloakToken(token: string): KeycloakTokenParsed | null {
+  try {
+    // Split JWT into parts
+    const parts = token.split('.')
+    if (parts.length !== 3) {
+      return null
+    }
+
+    // Decode the payload (second part)
+    const payload = parts[1]
+    if (!payload) {
+      return null
+    }
+
+    const decodedPayload = Buffer.from(payload, 'base64url').toString('utf-8')
+
+    return JSON.parse(decodedPayload) as KeycloakTokenParsed
+  }
+  catch (error) {
+    console.error('[nuxt-keycloak] Token decode failed:', error)
+    return null
+  }
+}
+
+/**
  * Verify Keycloak JWT token
  *
  * @param token - The JWT token to verify
@@ -56,7 +87,23 @@ export async function verifyKeycloakToken(token: string): Promise<KeycloakTokenP
   try {
     const config = useRuntimeConfig()
     const keycloakConfig = config.public.keycloak
+    const serverConfig = config.keycloak
 
+    // Check verification mode
+    const verifyToken = (serverConfig?.server?.verifyToken ?? true) as boolean | 'decode'
+
+    // If verifyToken is false, skip token processing entirely
+    if (verifyToken === false) {
+      return null
+    }
+
+    // If verifyToken is 'decode', use simple decode without verification
+    // This is useful when tokens are already verified by reverse proxy (e.g., Traefik)
+    if (verifyToken === 'decode') {
+      return decodeKeycloakToken(token)
+    }
+
+    // Default behavior: full JWKS verification
     const jwks = getJWKS()
 
     const { payload } = await jwtVerify(token, jwks, {

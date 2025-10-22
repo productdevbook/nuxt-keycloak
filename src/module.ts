@@ -69,6 +69,15 @@ export default defineNuxtModule<ModuleOptions>({
     // Add client plugin
     addPlugin(resolver.resolve('./runtime/plugin.client'))
 
+    // Copy silent-check-sso.html to public directory
+    nuxt.hook('nitro:config', (nitroConfig) => {
+      nitroConfig.publicAssets = nitroConfig.publicAssets || []
+      nitroConfig.publicAssets.push({
+        dir: resolver.resolve('./runtime/templates'),
+        maxAge: 60 * 60 * 24 * 365, // 1 year
+      })
+    })
+
     // Add server middleware if enabled
     if (options.server?.middleware) {
       addServerHandler({
