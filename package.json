@@ -1,6 +1,6 @@
 {
   "name": "nuxt-keycloak",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Comprehensive Keycloak authentication module for Nuxt 4 with SSR support, auto token refresh, role-based guards, and TypeScript",
   "repository": "productdevbook/nuxt-keycloak",
   "license": "MIT",
